@@ -1,0 +1,23 @@
+{
+	"name": "uglify-js-middleware",
+	"description": "Connect middleware for automatic uglification of JS files.",
+
+	"author": {
+		"name": "Jake Wharton",
+		"email": "jakewharton@gmail.com",
+		"url": "http://jakewharton.com"
+	},
+
+	"version": "1.0.0",
+
+	"main": "uglify-js-middleware.js",
+
+	"dependencies": {
+		"uglify-js": "1.0.1"
+	},
+
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/JakeWharton/uglify-js-middleware"
+	}
+}
