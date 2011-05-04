@@ -8,6 +8,11 @@ whenever a source file has been updated.
 You can install the library through the Node Package Manager by running
 `npm install uglify-js-middleware`.
 
+    var uglify = require('uglify-js');
+    require('uglify-js-middleware');
+    
+    //app setup...
+    
     app.use(uglify.middleware({
       src : __dirname + '/client',
       dest: __dirname + '/public',
