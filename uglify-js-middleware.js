@@ -80,13 +80,17 @@ module.exports = uglify.middleware = function(options) {
         fs.readFile(jsPath, 'utf8', function(err, str) {
           if (err) return error(err);
 
-          var ast = jsp.parse(str);
-          if (mangle) ast = pro.ast_mangle(ast);
-          if (squeeze) ast = pro.ast_squeeze(ast);
-          var ugly = pro.gen_code(ast);
-          fs.writeFile(uglyPath, ugly, 'utf8', function(err) {
-            next(err);
-          });
+          try {
+            var ast = jsp.parse(str);
+            if (mangle) ast = pro.ast_mangle(ast);
+            if (squeeze) ast = pro.ast_squeeze(ast);
+            var ugly = pro.gen_code(ast);
+            fs.writeFile(uglyPath, ugly, 'utf8', function(err) {
+              next(err);
+            });
+          } catch(ex) {
+            return next(ex);
+          }
         });
       }
 
