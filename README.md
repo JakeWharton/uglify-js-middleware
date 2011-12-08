@@ -15,8 +15,8 @@ You can install the library through the Node Package Manager by running
     
     app.use(uglify.middleware({
       src : __dirname + '/client',
-      dest: __dirname + '/public',
-    });
+      dest: __dirname + '/public'
+    }));
 
 If you are not already using `uglify`, the `require()` of this library will
 return the middleware function directly.
