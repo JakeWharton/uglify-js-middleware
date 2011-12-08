@@ -14,13 +14,14 @@ You can install the library through the Node Package Manager by running
     //app setup...
     
     app.use(uglify.middleware({
-      src : __dirname + '/client',
-      dest: __dirname + '/public'
+      src : __dirname + '/public/javascripts',
+      uglyext: 1
     }));
 
 If you are not already using `uglify`, the `require()` of this library will
 return the middleware function directly.
 
+Once in place, you can now develop with your pretty source.js code and call source.ugly.js within the html script tag to generate and serve uglyjs compressed javascript.
 
 Configuration
 -------------
@@ -29,7 +30,7 @@ The following options are supported:
 
  * `src`: Source directory of JavaScript files.
  * `dest`: Destination directory to place uglified files. If omitted, this will
-   default to match `src` and your generated files with be suffixed with
+   default to match `src` and your generated files will be suffixed with
    `.ugly.js` rather than just `.js`.
  * `force`: Boolean indicating whether to force uglification to occur on every
    access.
