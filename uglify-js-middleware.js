@@ -10,15 +10,9 @@ var jsp = uglify.parser
   , url = require('url')
   , basename = require('path').basename
   , join = require('path').join
-  , ENOENT;
+  , ENOENT = 'ENOENT';
 
 // COMPAT:
-
-try {
-  ENOENT = require('constants').ENOENT;
-} catch (err) {
-  ENOENT = process.ENOENT;
-}
 
 /**
  * Return Connect middleware with the given `options`.
@@ -70,7 +64,7 @@ module.exports = uglify.middleware = function(options) {
 
       // Ignore ENOENT to fall through as 404
       function error(err) {
-        next(ENOENT === err.errno ? null : err);
+        next(ENOENT === err.code ? null : err);
       }
 
       if (force) return compile();
@@ -98,7 +92,7 @@ module.exports = uglify.middleware = function(options) {
         if (err) return error(err);
         fs.stat(uglyPath, function(err, uglyStats) {
           if (err) {
-            if (ENOENT === err.errno) {
+            if (ENOENT === err.code) {
               // JS has not been uglified, compile it!
               compile();
             } else {
