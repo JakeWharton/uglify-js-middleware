@@ -21,7 +21,7 @@ You can install the library through the Node Package Manager by running
 If you are not already using `uglify`, the `require()` of this library will
 return the middleware function directly.
 
-Once in place, you can now develop pretty source.js code and call source.ugly.js within the html script tag to generate and serve 'uglify'-ed javascript.
+Once in place, you can now develop pretty source.js code and call source.ugly.js within the html script tag to generate and serve 'uglify' -ed javascript.
 
 Configuration
 -------------
