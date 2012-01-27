@@ -9,6 +9,8 @@ var jsp = uglify.parser
   , fs = require('fs')
   , url = require('url')
   , basename = require('path').basename
+  , dirname = require('path').dirname
+  , mkdirp = require('mkdirp')
   , join = require('path').join
   , ENOENT = 'ENOENT';
 
@@ -22,7 +24,7 @@ var jsp = uglify.parser
  * @param {Object} options
  * @return {Function}
  * @api public
- */
+ */  
 
 module.exports = uglify.middleware = function(options) {
   options = options || {};
@@ -79,9 +81,10 @@ module.exports = uglify.middleware = function(options) {
             if (mangle) ast = pro.ast_mangle(ast);
             if (squeeze) ast = pro.ast_squeeze(ast);
             var ugly = pro.gen_code(ast);
-            fs.writeFile(uglyPath, ugly, 'utf8', function(err) {
-              next(err);
-            });
+            mkdirp(dirname(uglyPath), 0700, function(err){
+              if (err) return error(err);
+              fs.writeFile(uglyPath, ugly, 'utf8', next);
+            });            
           } catch(ex) {
             return next(ex);
           }
@@ -113,4 +116,4 @@ module.exports = uglify.middleware = function(options) {
       next();
     }
   };
-}
+};
