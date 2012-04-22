@@ -42,6 +42,9 @@ module.exports = uglify.middleware = function(options) {
 
   // Code squeezing
   var squeeze = options.squeeze || true;
+  
+  // ugly extension
+  var uglySuffix = options.uglySuffix || '.ugly.js';
 
   // Source dir required
   var src = options.src;
@@ -54,15 +57,15 @@ module.exports = uglify.middleware = function(options) {
 
   // Whether to "ugly" the extension (default true if same dirs, else false)
   var uglyext = options.uglyext || (src === dest);
-  var uglyregex = uglyext ? /\.ugly\.js$/ : /\.js$/;
+  var suffix = uglyext ? uglySuffix : '.js';
 
   return function(req, res, next) {
     if ('GET' != req.method && 'HEAD' != req.method) return next();
 
     var path = url.parse(req.url).pathname;
-    if (uglyregex.test(path)) {
+    if (path.indexOf(suffix, -suffix.length) !== -1) {
       var uglyPath = join(dest, path)
-        , jsPath = join(src, uglyext ? path.replace('.ugly.js', '.js') : path);
+        , jsPath = join(src, uglyext ? path.replace(uglySuffix, '.js') : path);
 
       // Ignore ENOENT to fall through as 404
       function error(err) {
