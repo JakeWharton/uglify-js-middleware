@@ -14,7 +14,8 @@
 
 	"dependencies": {
 		"uglify-js": "1.2.5",
-		"mkdirp": "0.0.7"
+		"mkdirp": "0.0.7",
+		"async": "0.1.22"
 	},
 
 	"repository": {
