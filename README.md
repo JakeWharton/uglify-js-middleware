@@ -38,6 +38,9 @@ The following options are supported:
  * `squeeze`: Boolean indicating whether the code should be squeezed.
  * `uglyext`: Boolean indicating whether to use the `.ugly.js` extension for
    generated files.
+ * `uglySuffix`: String identifing the ugly suffix, default to `.ugly.js`
+ * `groups`: Hash with as key a pathname and as value an Array with filenames
+   it should compile and concat
 
 
 
